@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urban RolePlay Hub</title>
+    <title>Urban RolePlay Hub - Форум игры</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -34,7 +34,7 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background-color: var(--secondary);
             border-radius: 10px;
@@ -103,6 +103,46 @@
             background-color: var(--secondary);
         }
         
+        .police-tab.active {
+            color: var(--police);
+            border-bottom: 2px solid var(--police);
+        }
+        
+        .subnav-tabs {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 20px 0;
+            border-bottom: 2px solid var(--border);
+            flex-wrap: wrap;
+        }
+        
+        .subnav-tabs li {
+            margin: 0 5px;
+        }
+        
+        .subtab-btn {
+            background: none;
+            border: none;
+            color: var(--text);
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px 5px 0 0;
+            transition: all 0.3s;
+        }
+        
+        .subtab-btn:hover {
+            background-color: rgba(88, 166, 255, 0.1);
+        }
+        
+        .subtab-btn.active {
+            color: var(--police);
+            border-bottom: 2px solid var(--police);
+            background-color: var(--secondary);
+        }
+        
         .tab-content {
             display: none;
             padding: 20px;
@@ -149,6 +189,26 @@
             text-align: center;
         }
         
+        .stats-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-item {
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
         .call-info {
             background-color: var(--card-bg);
             padding: 15px;
@@ -157,12 +217,12 @@
             border-left: 4px solid var(--accent);
         }
         
-        .form-section {
+        .police-info {
             background-color: var(--card-bg);
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
-            margin: 15px 0;
-            border: 1px solid var(--border);
+            margin: 10px 0;
+            border-left: 4px solid var(--police);
         }
         
         .btn-accept {
@@ -202,7 +262,7 @@
         }
         
         .btn-police:hover {
-            background-color: #2c4cc4;
+            background-color: #4a6ee0;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(58, 86, 204, 0.3);
         }
@@ -239,6 +299,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+        
+        .police-item {
+            border-left: 3px solid var(--police);
         }
         
         .active-call {
@@ -330,6 +394,44 @@
             border: 2px solid var(--danger);
         }
         
+        .form-section {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--border);
+            background-color: var(--secondary);
+            color: var(--text);
+            font-size: 16px;
+        }
+        
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
         .modal {
             display: none;
             position: fixed;
@@ -372,37 +474,6 @@
             cursor: pointer;
         }
         
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        
-        .form-input, .form-select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 5px;
-            border: 1px solid var(--border);
-            background-color: var(--card-bg);
-            color: var(--text);
-            font-size: 16px;
-        }
-        
-        .form-row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .form-row .form-group {
-            flex: 1;
-            margin-bottom: 0;
-        }
-        
         .btn-clear {
             background-color: var(--danger);
             color: white;
@@ -442,12 +513,12 @@
         }
         
         @media (max-width: 768px) {
-            .nav-tabs {
+            .nav-tabs, .subnav-tabs {
                 flex-direction: column;
                 align-items: center;
             }
             
-            .tab-btn {
+            .tab-btn, .subtab-btn {
                 width: 100%;
                 border-radius: 5px;
                 margin-bottom: 5px;
@@ -464,8 +535,7 @@
             }
             
             .form-row {
-                flex-direction: column;
-                gap: 0;
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -481,13 +551,28 @@
             <li><button class="tab-btn active" onclick="openTab('tab-contracts')"><i class="fas fa-truck"></i> Дальнобойщик</button></li>
             <li><button class="tab-btn" onclick="openTab('tab-ems')"><i class="fas fa-ambulance"></i> ЕСС (СМП)</button></li>
             <li><button class="tab-btn" onclick="openTab('tab-mchs')"><i class="fas fa-fire-extinguisher"></i> ЕСС (МЧС)</button></li>
-            <li><button class="tab-btn" onclick="openTab('tab-mvd')"><i class="fas fa-shield-alt"></i> МВД</button></li>
+            <li><button class="tab-btn police-tab" onclick="openTab('tab-police')"><i class="fas fa-shield-alt"></i> МВД</button></li>
         </ul>
 
         <!-- ВКЛАДКА 1: ДАЛЬНОБОЙЩИК -->
         <div id="tab-contracts" class="tab-content active">
             <h2><i class="fas fa-truck-moving job-icon"></i> Контракты на перевозку</h2>
             <p>Система управления грузоперевозками. Выберите доступный контракт для выполнения.</p>
+            
+            <div class="stats-box">
+                <div class="stat-item">
+                    <div class="stat-value" id="contracts-completed">0</div>
+                    <div>Выполнено контрактов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="contracts-expired">0</div>
+                    <div>Пропущено контрактов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="contracts-total">0</div>
+                    <div>Всего контрактов</div>
+                </div>
+            </div>
             
             <div class="timer-info">
                 <i class="fas fa-sync-alt"></i> Следующее обновление контрактов через: <span id="contracts-timer">--:--</span>
@@ -517,6 +602,21 @@
             <h2><i class="fas fa-ambulance job-icon"></i> Служба скорой медицинской помощи</h2>
             <p>Система приема и обработки вызовов скорой медицинской помощи.</p>
             
+            <div class="stats-box">
+                <div class="stat-item">
+                    <div class="stat-value" id="ems-completed">0</div>
+                    <div>Принято вызовов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="ems-expired">0</div>
+                    <div>Пропущено вызовов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="ems-total">0</div>
+                    <div>Всего вызовов</div>
+                </div>
+            </div>
+            
             <div class="timer-info">
                 <i class="fas fa-clock"></i> Следующий вызов СМП поступит через: <span id="ems-timer">--:--</span>
             </div>
@@ -541,6 +641,21 @@
             <h2><i class="fas fa-fire-extinguisher job-icon"></i> Служба МЧС</h2>
             <p>Система приема и обработки вызовов экстренной службы МЧС.</p>
             
+            <div class="stats-box">
+                <div class="stat-item">
+                    <div class="stat-value" id="mchs-completed">0</div>
+                    <div>Принято вызовов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="mchs-expired">0</div>
+                    <div>Пропущено вызовов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="mchs-total">0</div>
+                    <div>Всего вызовов</div>
+                </div>
+            </div>
+            
             <div class="timer-info">
                 <i class="fas fa-clock"></i> Следующий вызов МЧС поступит через: <span id="mchs-timer">--:--</span>
             </div>
@@ -561,262 +676,267 @@
         </div>
 
         <!-- ВКЛАДКА 4: МВД -->
-        <div id="tab-mvd" class="tab-content">
+        <div id="tab-police" class="tab-content">
             <h2><i class="fas fa-shield-alt job-icon"></i> Министерство внутренних дел</h2>
+            <p>Система документооборота и учета МВД. Доступ только по паролю.</p>
             
-            <div id="mvd-login-section">
-                <div class="police-box">
-                    <i class="fas fa-lock"></i> Для доступа к разделу МВД требуется авторизация
+            <div class="form-section" id="police-login-section">
+                <h3>Авторизация МВД</h3>
+                <div class="form-group">
+                    <label class="form-label" for="police-password">Пароль доступа:</label>
+                    <input type="password" id="police-password" class="form-input" placeholder="Введите пароль доступа">
                 </div>
-                <div class="form-section">
-                    <div class="form-group">
-                        <label class="form-label" for="mvd-password">Пароль доступа:</label>
-                        <input type="password" id="mvd-password" class="form-input" placeholder="Введите пароль доступа">
-                    </div>
-                    <button class="btn-police" onclick="loginMVD()">Войти в систему МВД</button>
-                </div>
+                <button class="btn-police" onclick="loginToPolice()">ВОЙТИ В СИСТЕМУ МВД</button>
             </div>
             
-            <div id="mvd-content" style="display: none;">
-                <div class="police-box">
-                    <i class="fas fa-shield-alt"></i> Добро пожаловать в систему МВД
-                </div>
+            <div id="police-content" style="display: none;">
+                <ul class="subnav-tabs">
+                    <li><button class="subtab-btn active" onclick="openSubTab('subtab-database')">База данных</button></li>
+                    <li><button class="subtab-btn" onclick="openSubTab('subtab-dtp')">Оформление ДТП</button></li>
+                    <li><button class="subtab-btn" onclick="openSubTab('subtab-arrest')">Отчет об аресте</button></li>
+                </ul>
                 
-                <div class="nav-tabs">
-                    <li><button class="tab-btn active" onclick="openMVDTab('tab-mvd-database')">База данных</button></li>
-                    <li><button class="tab-btn" onclick="openMVDTab('tab-mvd-dtp')">Оформление ДТП</button></li>
-                    <li><button class="tab-btn" onclick="openMVDTab('tab-mvd-arrest')">Отчет об аресте</button></li>
-                </div>
-                
-                <!-- ПОДРАЗДЕЛ 1: База данных -->
-                <div id="tab-mvd-database" class="mvd-tab-content active">
-                    <h3><i class="fas fa-database"></i> База данных МВД</h3>
-                    <p>Внесите информацию в базу данных МВД.</p>
+                <!-- ПОДВКЛАДКА 1: БАЗА ДАННЫХ -->
+                <div id="subtab-database" class="tab-content active">
+                    <h3>База данных МВД</h3>
+                    
+                    <div class="stats-box">
+                        <div class="stat-item">
+                            <div class="stat-value" id="db-total">0</div>
+                            <div>Всего записей</div>
+                        </div>
+                    </div>
                     
                     <div class="form-section">
+                        <h4>Добавить новую запись в базу данных</h4>
                         <div class="form-row">
                             <div class="form-group">
-                                <label class="form-label">Уникальный номер:</label>
-                                <input type="text" id="mvd-unique-id" class="form-input" value="МВД-0001" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Действие:</label>
-                                <select id="mvd-action" class="form-select">
+                                <label class="form-label" for="db-action">Действие:</label>
+                                <select id="db-action" class="form-select">
+                                    <option value="">Выберите действие</option>
                                     <option value="Остановка ТС">Остановка ТС</option>
                                     <option value="Административный штраф">Административный штраф</option>
                                     <option value="Арест/задержание гражданина">Арест/задержание гражданина</option>
                                     <option value="Лишение права на управление ТС">Лишение права на управление ТС</option>
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label class="form-label" for="db-reason">Причина/Статья:</label>
+                                <input type="text" id="db-reason" class="form-input" placeholder="Введите причину или статью">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="db-vehicle-brand">Марка ТС:</label>
+                                <input type="text" id="db-vehicle-brand" class="form-input" placeholder="Марка транспортного средства">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="db-vehicle-model">Модель ТС:</label>
+                                <input type="text" id="db-vehicle-model" class="form-input" placeholder="Модель транспортного средства">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="db-vehicle-color">Цвет ТС:</label>
+                                <input type="text" id="db-vehicle-color" class="form-input" placeholder="Цвет транспортного средства">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="db-vehicle-number">Госномер ТС:</label>
+                                <input type="text" id="db-vehicle-number" class="form-input" placeholder="Государственный номер">
+                            </div>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">Причина (статья):</label>
-                            <input type="text" id="mvd-reason" class="form-input" placeholder="Введите причину или статью">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Транспортное средство:</label>
-                            <div class="form-row">
-                                <input type="text" id="mvd-car-brand" class="form-input" placeholder="Марка">
-                                <input type="text" id="mvd-car-model" class="form-input" placeholder="Модель">
-                            </div>
-                            <div class="form-row">
-                                <input type="text" id="mvd-car-color" class="form-input" placeholder="Цвет">
-                                <input type="text" id="mvd-car-number" class="form-input" placeholder="Госномер">
-                            </div>
-                            <select id="mvd-car-owner-type" class="form-select" style="margin-top: 10px;">
-                                <option value="Свое ТС">Свое ТС</option>
-                                <option value="Аренда">Аренда</option>
+                            <label class="form-label" for="db-vehicle-owner">Владелец ТС:</label>
+                            <select id="db-vehicle-owner" class="form-select">
+                                <option value="">Выберите владельца</option>
+                                <option value="Собственное ТС">Собственное ТС</option>
+                                <option value="Арендованное ТС">Арендованное ТС</option>
                             </select>
                         </div>
                         
-                        <div class="form-group">
-                            <label class="form-label">Владелец:</label>
-                            <div class="form-row">
-                                <input type="text" id="mvd-owner-name" class="form-input" placeholder="Имя">
-                                <input type="text" id="mvd-owner-patronymic" class="form-input" placeholder="Отчество">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="db-owner-name">ФИО владельца:</label>
+                                <input type="text" id="db-owner-name" class="form-input" placeholder="Фамилия Имя Отчество">
                             </div>
-                            <input type="text" id="mvd-owner-passport" class="form-input" placeholder="Номер паспорта" style="margin-top: 10px;">
+                            <div class="form-group">
+                                <label class="form-label" for="db-owner-passport">№ паспорта:</label>
+                                <input type="text" id="db-owner-passport" class="form-input" placeholder="Номер паспорта">
+                            </div>
                         </div>
                         
                         <div class="form-row">
                             <div class="form-group">
-                                <label class="form-label">Дата:</label>
-                                <input type="text" id="mvd-date" class="form-input" placeholder="ДД.ММ.ГГГГ">
+                                <label class="form-label" for="db-date">Дата:</label>
+                                <input type="text" id="db-date" class="form-input" placeholder="ДД.ММ.ГГГГ">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Игровой день:</label>
-                                <input type="number" id="mvd-game-day" class="form-input" placeholder="Номер дня">
+                                <label class="form-label" for="db-game-day">Игровой день:</label>
+                                <input type="number" id="db-game-day" class="form-input" placeholder="Номер игрового дня">
                             </div>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">Кто составил документ:</label>
-                            <div class="form-row">
-                                <input type="text" id="mvd-officer-position" class="form-input" placeholder="Должность">
-                                <input type="text" id="mvd-officer-name" class="form-input" placeholder="Имя">
-                                <input type="text" id="mvd-officer-patronymic" class="form-input" placeholder="Отчество">
-                            </div>
+                            <label class="form-label" for="db-officer">Кто составил документ:</label>
+                            <input type="text" id="db-officer" class="form-input" placeholder="Должность, ФИО">
                         </div>
                         
-                        <button class="btn-police" onclick="saveMVDRecord()">Сохранить в базу данных</button>
+                        <button class="btn-police" onclick="addToDatabase()">ДОБАВИТЬ В БАЗУ ДАННЫХ</button>
                     </div>
                     
                     <div class="history-section">
                         <div class="history-header">
-                            <h3><i class="fas fa-history"></i> История базы данных</h3>
-                            <button class="btn-clear" onclick="showClearHistoryModal('mvd-database')">Очистить историю</button>
+                            <h4><i class="fas fa-database"></i> История базы данных</h4>
+                            <button class="btn-clear" onclick="showClearHistoryModal('police_db')">Очистить историю</button>
                         </div>
-                        <div id="mvd-database-history">
+                        <div id="police-db-history">
                             <!-- История будет загружаться из localStorage -->
                         </div>
                     </div>
                 </div>
                 
-                <!-- ПОДРАЗДЕЛ 2: Оформление ДТП -->
-                <div id="tab-mvd-dtp" class="mvd-tab-content">
-                    <h3><i class="fas fa-car-crash"></i> Оформление ДТП</h3>
-                    <p>Заполните информацию о дорожно-транспортном происшествии.</p>
+                <!-- ПОДВКЛАДКА 2: ОФОРМЛЕНИЕ ДТП -->
+                <div id="subtab-dtp" class="tab-content">
+                    <h3>Оформление дорожно-транспортных происшествий</h3>
+                    
+                    <div class="stats-box">
+                        <div class="stat-item">
+                            <div class="stat-value" id="dtp-total">0</div>
+                            <div>Оформлено ДТП</div>
+                        </div>
+                    </div>
                     
                     <div class="form-section">
+                        <h4>Оформление нового ДТП</h4>
+                        <div class="form-group">
+                            <label class="form-label" for="dtp-location">Место ДТП:</label>
+                            <input type="text" id="dtp-location" class="form-input" placeholder="Адрес места происшествия">
+                        </div>
+                        
                         <div class="form-row">
                             <div class="form-group">
-                                <label class="form-label">Номер протокола:</label>
-                                <input type="text" id="dtp-protocol-number" class="form-input" value="ДТП-0001" readonly>
+                                <label class="form-label" for="dtp-date">Дата и время:</label>
+                                <input type="text" id="dtp-date" class="form-input" placeholder="ДД.ММ.ГГГГ ЧЧ:ММ">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Дата и время ДТП:</label>
-                                <input type="text" id="dtp-date-time" class="form-input" placeholder="ДД.ММ.ГГГГ ЧЧ:ММ">
+                                <label class="form-label" for="dtp-weather">Погодные условия:</label>
+                                <select id="dtp-weather" class="form-select">
+                                    <option value="">Выберите условия</option>
+                                    <option value="Ясно">Ясно</option>
+                                    <option value="Пасмурно">Пасмурно</option>
+                                    <option value="Дождь">Дождь</option>
+                                    <option value="Снег">Снег</option>
+                                    <option value="Туман">Туман</option>
+                                </select>
                             </div>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">Место происшествия:</label>
-                            <input type="text" id="dtp-location" class="form-input" placeholder="Адрес места ДТП">
+                            <label class="form-label" for="dtp-participants">Участники ДТП:</label>
+                            <textarea id="dtp-participants" class="form-textarea" placeholder="Опишите участников ДТП: марки, модели, госномера автомобилей, ФИО водителей"></textarea>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">Участники ДТП:</label>
-                            <textarea id="dtp-participants" class="form-input" rows="3" placeholder="Укажите участников ДТП"></textarea>
+                            <label class="form-label" for="dtp-damage">Повреждения ТС:</label>
+                            <textarea id="dtp-damage" class="form-textarea" placeholder="Опишите повреждения транспортных средств"></textarea>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">Повреждения ТС:</label>
-                            <textarea id="dtp-damages" class="form-input" rows="3" placeholder="Опишите повреждения транспортных средств"></textarea>
+                            <label class="form-label" for="dtp-violations">Нарушения ПДД:</label>
+                            <textarea id="dtp-violations" class="form-textarea" placeholder="Опишите нарушения правил дорожного движения"></textarea>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">Причина ДТП:</label>
-                            <textarea id="dtp-cause" class="form-input" rows="2" placeholder="Укажите причину ДТП"></textarea>
+                            <label class="form-label" for="dtp-witnesses">Свидетели:</label>
+                            <textarea id="dtp-witnesses" class="form-textarea" placeholder="ФИО и контактные данные свидетелей"></textarea>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">Схема ДТП:</label>
-                            <textarea id="dtp-scheme" class="form-input" rows="3" placeholder="Опишите схему ДТП"></textarea>
+                            <label class="form-label" for="dtp-officer">Сотрудник, оформивший ДТП:</label>
+                            <input type="text" id="dtp-officer" class="form-input" placeholder="Должность, ФИО">
                         </div>
                         
-                        <div class="form-group">
-                            <label class="form-label">Свидетели:</label>
-                            <textarea id="dtp-witnesses" class="form-input" rows="2" placeholder="ФИО и контакты свидетелей"></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Инспектор, составивший протокол:</label>
-                            <div class="form-row">
-                                <input type="text" id="dtp-officer-name" class="form-input" placeholder="Имя">
-                                <input type="text" id="dtp-officer-patronymic" class="form-input" placeholder="Отчество">
-                                <input type="text" id="dtp-officer-rank" class="form-input" placeholder="Звание">
-                            </div>
-                        </div>
-                        
-                        <button class="btn-police" onclick="saveDTPRecord()">Сохранить протокол ДТП</button>
+                        <button class="btn-police" onclick="addDTPReport()">ОФОРМИТЬ ДТП</button>
                     </div>
                     
                     <div class="history-section">
                         <div class="history-header">
-                            <h3><i class="fas fa-history"></i> История оформления ДТП</h3>
-                            <button class="btn-clear" onclick="showClearHistoryModal('mvd-dtp')">Очистить историю</button>
+                            <h4><i class="fas fa-car-crash"></i> История оформленных ДТП</h4>
+                            <button class="btn-clear" onclick="showClearHistoryModal('police_dtp')">Очистить историю</button>
                         </div>
-                        <div id="mvd-dtp-history">
+                        <div id="police-dtp-history">
                             <!-- История будет загружаться из localStorage -->
                         </div>
                     </div>
                 </div>
                 
-                <!-- ПОДРАЗДЕЛ 3: Отчет об аресте -->
-                <div id="tab-mvd-arrest" class="mvd-tab-content">
-                    <h3><i class="fas fa-handcuffs"></i> Отчет об аресте/задержании</h3>
-                    <p>Заполните отчет о проведенном аресте или задержании.</p>
+                <!-- ПОДВКЛАДКА 3: ОТЧЕТ ОБ АРЕСТЕ -->
+                <div id="subtab-arrest" class="tab-content">
+                    <h3>Отчеты об арестах и задержаниях</h3>
+                    
+                    <div class="stats-box">
+                        <div class="stat-item">
+                            <div class="stat-value" id="arrest-total">0</div>
+                            <div>Зарегистрировано арестов</div>
+                        </div>
+                    </div>
                     
                     <div class="form-section">
+                        <h4>Новый отчет об аресте/задержании</h4>
                         <div class="form-row">
                             <div class="form-group">
-                                <label class="form-label">Номер отчета:</label>
-                                <input type="text" id="arrest-report-number" class="form-input" value="АР-0001" readonly>
+                                <label class="form-label" for="arrest-name">ФИО задержанного:</label>
+                                <input type="text" id="arrest-name" class="form-input" placeholder="Фамилия Имя Отчество">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Дата и время задержания:</label>
-                                <input type="text" id="arrest-date-time" class="form-input" placeholder="ДД.ММ.ГГГГ ЧЧ:ММ">
+                                <label class="form-label" for="arrest-passport">№ паспорта:</label>
+                                <input type="text" id="arrest-passport" class="form-input" placeholder="Номер паспорта">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="arrest-date">Дата и время задержания:</label>
+                                <input type="text" id="arrest-date" class="form-input" placeholder="ДД.ММ.ГГГГ ЧЧ:ММ">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="arrest-location">Место задержания:</label>
+                                <input type="text" id="arrest-location" class="form-input" placeholder="Адрес места задержания">
                             </div>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">Задержанный:</label>
-                            <div class="form-row">
-                                <input type="text" id="arrested-name" class="form-input" placeholder="Имя">
-                                <input type="text" id="arrested-patronymic" class="form-input" placeholder="Отчество">
-                                <input type="text" id="arrested-surname" class="form-input" placeholder="Фамилия">
-                            </div>
-                            <div class="form-row">
-                                <input type="text" id="arrested-passport" class="form-input" placeholder="Номер паспорта">
-                                <input type="text" id="arrested-birthdate" class="form-input" placeholder="Дата рождения">
-                            </div>
+                            <label class="form-label" for="arrest-reason">Причина задержания:</label>
+                            <textarea id="arrest-reason" class="form-textarea" placeholder="Подробно опишите причину задержания"></textarea>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">Адрес задержанного:</label>
-                            <input type="text" id="arrested-address" class="form-input" placeholder="Адрес проживания">
+                            <label class="form-label" for="arrest-evidence">Изъятые доказательства:</label>
+                            <textarea id="arrest-evidence" class="form-textarea" placeholder="Опишите изъятые доказательства"></textarea>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">Место задержания:</label>
-                            <input type="text" id="arrest-location" class="form-input" placeholder="Адрес места задержания">
+                            <label class="form-label" for="arrest-witnesses">Свидетели:</label>
+                            <textarea id="arrest-witnesses" class="form-textarea" placeholder="ФИО и контактные данные свидетелей"></textarea>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">Причина задержания:</label>
-                            <textarea id="arrest-reason" class="form-input" rows="2" placeholder="Укажите причину задержания"></textarea>
+                            <label class="form-label" for="arrest-officer">Сотрудник, составивший отчет:</label>
+                            <input type="text" id="arrest-officer" class="form-input" placeholder="Должность, ФИО">
                         </div>
                         
-                        <div class="form-group">
-                            <label class="form-label">Изъятые предметы:</label>
-                            <textarea id="arrest-seized" class="form-input" rows="2" placeholder="Опишите изъятые предметы"></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Дополнительная информация:</label>
-                            <textarea id="arrest-notes" class="form-input" rows="3" placeholder="Дополнительные сведения о задержании"></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Инспектор, составивший отчет:</label>
-                            <div class="form-row">
-                                <input type="text" id="arrest-officer-name" class="form-input" placeholder="Имя">
-                                <input type="text" id="arrest-officer-patronymic" class="form-input" placeholder="Отчество">
-                                <input type="text" id="arrest-officer-rank" class="form-input" placeholder="Звание">
-                            </div>
-                        </div>
-                        
-                        <button class="btn-police" onclick="saveArrestRecord()">Сохранить отчет о задержании</button>
+                        <button class="btn-police" onclick="addArrestReport()">ДОБАВИТЬ ОТЧЕТ ОБ АРЕСТЕ</button>
                     </div>
                     
                     <div class="history-section">
                         <div class="history-header">
-                            <h3><i class="fas fa-history"></i> История отчетов о задержаниях</h3>
-                            <button class="btn-clear" onclick="showClearHistoryModal('mvd-arrest')">Очистить историю</button>
+                            <h4><i class="fas fa-handcuffs"></i> История арестов и задержаний</h4>
+                            <button class="btn-clear" onclick="showClearHistoryModal('police_arrest')">Очистить историю</button>
                         </div>
-                        <div id="mvd-arrest-history">
+                        <div id="police-arrest-history">
                             <!-- История будет загружаться из localStorage -->
                         </div>
                     </div>
@@ -870,14 +990,21 @@
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
+            
+            // Если открываем вкладку МВД, проверяем авторизацию
+            if (tabId === 'tab-police') {
+                const isPoliceLoggedIn = localStorage.getItem('policeLoggedIn') === 'true';
+                if (!isPoliceLoggedIn) {
+                    document.getElementById('police-login-section').style.display = 'block';
+                    document.getElementById('police-content').style.display = 'none';
+                }
+            }
         }
-
-        // Логика переключения подвкладок МВД
-        function openMVDTab(tabId) {
-            document.querySelectorAll('.mvd-tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.mvd-tab-content').forEach(tab => tab.style.display = 'none');
-            document.getElementById(tabId).classList.add('active');
-            document.getElementById(tabId).style.display = 'block';
+        
+        function openSubTab(subTabId) {
+            document.querySelectorAll('#police-content .tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.subtab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(subTabId).classList.add('active');
             event.currentTarget.classList.add('active');
         }
 
@@ -894,7 +1021,7 @@
             9: "Выраженная одышка в покое, хрипы в легких, вынужденное положение (ортопноэ), отеки ног",
             10: "Резкая головная боль (\"как удар\"), рвота, потеря сознания, ригидность затылочных мышц",
             11: "Высокое АД (например, 220/120), сильная головная боль, тонота, рвота, нарушение зрения",
-            12: "Высокий/низкий уровень сахара в крови (измерение глюкометром), спутанность сознания/агрессия/слабость, запах ацетона (при высоком), дрожь/потливость (при низком)",
+            12: "Высокий/низкий уровень сахара в крови (измерение глюкометром), спутанность сознания/агрессия/слабость, запах ацetonа (при высоком), дрожь/потливость (при низком)",
             13: "Сильная, пульсирующая головная боль (часто с одной стороны), тонота, свето-/звукобоязнь",
             14: "Заложенность носа, чихание, слезотечение, зуд в носу/глазах, кожная сыпь после контакта с аллергеном",
             15: "Боль/жжение при мочеиспускании, частые позывы, мутная/кровянистая моча, дискомфорт внизу живота",
@@ -1001,12 +1128,6 @@
         let currentCallId = null;
         let currentCallType = null;
         let currentHistoryType = null;
-        let mvdLoggedIn = false;
-
-        // Глобальные счетчики для МВД
-        let mvdCounter = 1;
-        let dtpCounter = 1;
-        let arrestCounter = 1;
 
         // ФУНКЦИИ ГЕНЕРАЦИИ СЛУЧАЙНЫХ ДАННЫХ
         function getRandomItem(array) {
@@ -1062,262 +1183,174 @@
             const newHistory = history.filter(item => item.type !== type);
             saveToStorage('callHistory', newHistory);
             displayHistory();
+            updateStats();
         }
 
         // АВТОРИЗАЦИЯ В МВД
-        function loginMVD() {
-            const password = document.getElementById('mvd-password').value;
+        function loginToPolice() {
+            const password = document.getElementById('police-password').value;
             if (password === '121212') {
-                mvdLoggedIn = true;
-                document.getElementById('mvd-login-section').style.display = 'none';
-                document.getElementById('mvd-content').style.display = 'block';
-                showNotification('Доступ к системе МВД разрешен!');
-                
-                // Загружаем счетчики из localStorage
-                const counters = loadFromStorage('mvd-counters') || { mvd: 1, dtp: 1, arrest: 1 };
-                mvdCounter = counters.mvd;
-                dtpCounter = counters.dtp;
-                arrestCounter = counters.arrest;
-                
-                // Обновляем поля с номерами
-                document.getElementById('mvd-unique-id').value = `МВД-${mvdCounter.toString().padStart(4, '0')}`;
-                document.getElementById('dtp-protocol-number').value = `ДТП-${dtpCounter.toString().padStart(4, '0')}`;
-                document.getElementById('arrest-report-number').value = `АР-${arrestCounter.toString().padStart(4, '0')}`;
-                
-                // Загружаем историю МВД
-                displayMVDHistory();
+                localStorage.setItem('policeLoggedIn', 'true');
+                document.getElementById('police-login-section').style.display = 'none';
+                document.getElementById('police-content').style.display = 'block';
+                showNotification('Успешный вход в систему МВД!');
             } else {
                 showNotification('Неверный пароль доступа!', true);
             }
         }
 
-        // СОХРАНЕНИЕ ДАННЫХ МВД
-        function saveMVDRecord() {
-            if (!mvdLoggedIn) {
-                showNotification('Требуется авторизация в системе МВД!', true);
+        // ДОБАВЛЕНИЕ ДАННЫХ В БАЗУ МВД
+        function addToDatabase() {
+            const action = document.getElementById('db-action').value;
+            const reason = document.getElementById('db-reason').value;
+            const vehicleBrand = document.getElementById('db-vehicle-brand').value;
+            const vehicleModel = document.getElementById('db-vehicle-model').value;
+            const vehicleColor = document.getElementById('db-vehicle-color').value;
+            const vehicleNumber = document.getElementById('db-vehicle-number').value;
+            const vehicleOwner = document.getElementById('db-vehicle-owner').value;
+            const ownerName = document.getElementById('db-owner-name').value;
+            const ownerPassport = document.getElementById('db-owner-passport').value;
+            const date = document.getElementById('db-date').value;
+            const gameDay = document.getElementById('db-game-day').value;
+            const officer = document.getElementById('db-officer').value;
+
+            if (!action || !reason || !vehicleBrand || !vehicleModel || !vehicleColor || !vehicleNumber || 
+                !vehicleOwner || !ownerName || !ownerPassport || !date || !gameDay || !officer) {
+                showNotification('Заполните все поля!', true);
                 return;
             }
-            
-            const record = {
-                id: mvdCounter,
-                uniqueId: `МВД-${mvdCounter.toString().padStart(4, '0')}`,
-                action: document.getElementById('mvd-action').value,
-                reason: document.getElementById('mvd-reason').value,
-                car: {
-                    brand: document.getElementById('mvd-car-brand').value,
-                    model: document.getElementById('mvd-car-model').value,
-                    color: document.getElementById('mvd-car-color').value,
-                    number: document.getElementById('mvd-car-number').value,
-                    ownerType: document.getElementById('mvd-car-owner-type').value
-                },
-                owner: {
-                    name: document.getElementById('mvd-owner-name').value,
-                    patronymic: document.getElementById('mvd-owner-patronymic').value,
-                    passport: document.getElementById('mvd-owner-passport').value
-                },
-                date: document.getElementById('mvd-date').value,
-                gameDay: document.getElementById('mvd-game-day').value,
-                officer: {
-                    position: document.getElementById('mvd-officer-position').value,
-                    name: document.getElementById('mvd-officer-name').value,
-                    patronymic: document.getElementById('mvd-officer-patronymic').value
-                },
-                timestamp: new Date().toLocaleString('ru-RU'),
-                type: 'mvd-database'
+
+            const dbRecord = {
+                id: Date.now(),
+                type: 'police_db',
+                action: action,
+                reason: reason,
+                vehicle: `${vehicleBrand} ${vehicleModel}, ${vehicleColor}, ${vehicleNumber}, ${vehicleOwner}`,
+                owner: `${ownerName}, паспорт: ${ownerPassport}`,
+                date: `${date} г. (${gameDay})`,
+                officer: officer,
+                timestamp: new Date().toLocaleString('ru-RU')
             };
-            
-            // Сохраняем запись в историю
+
             const history = loadFromStorage('callHistory');
-            history.push(record);
+            history.push(dbRecord);
             saveToStorage('callHistory', history);
-            
-            // Увеличиваем счетчик
-            mvdCounter++;
-            saveToStorage('mvd-counters', { mvd: mvdCounter, dtp: dtpCounter, arrest: arrestCounter });
-            document.getElementById('mvd-unique-id').value = `МВД-${mvdCounter.toString().padStart(4, '0')}`;
-            
+
             // Очищаем форму
-            document.getElementById('mvd-reason').value = '';
-            document.getElementById('mvd-car-brand').value = '';
-            document.getElementById('mvd-car-model').value = '';
-            document.getElementById('mvd-car-color').value = '';
-            document.getElementById('mvd-car-number').value = '';
-            document.getElementById('mvd-owner-name').value = '';
-            document.getElementById('mvd-owner-patronymic').value = '';
-            document.getElementById('mvd-owner-passport').value = '';
-            document.getElementById('mvd-date').value = '';
-            document.getElementById('mvd-game-day').value = '';
-            document.getElementById('mvd-officer-position').value = '';
-            document.getElementById('mvd-officer-name').value = '';
-            document.getElementById('mvd-officer-patronymic').value = '';
-            
-            // Обновляем историю
-            displayMVDHistory();
-            showNotification('Запись добавлена в базу данных МВД!');
+            document.getElementById('db-action').value = '';
+            document.getElementById('db-reason').value = '';
+            document.getElementById('db-vehicle-brand').value = '';
+            document.getElementById('db-vehicle-model').value = '';
+            document.getElementById('db-vehicle-color').value = '';
+            document.getElementById('db-vehicle-number').value = '';
+            document.getElementById('db-vehicle-owner').value = '';
+            document.getElementById('db-owner-name').value = '';
+            document.getElementById('db-owner-passport').value = '';
+            document.getElementById('db-date').value = '';
+            document.getElementById('db-game-day').value = '';
+            document.getElementById('db-officer').value = '';
+
+            displayHistory();
+            updateStats();
+            showNotification('Запись добавлена в базу данных!');
         }
 
-        function saveDTPRecord() {
-            if (!mvdLoggedIn) {
-                showNotification('Требуется авторизация в системе МВД!', true);
+        // ДОБАВЛЕНИЕ ДТП
+        function addDTPReport() {
+            const location = document.getElementById('dtp-location').value;
+            const date = document.getElementById('dtp-date').value;
+            const weather = document.getElementById('dtp-weather').value;
+            const participants = document.getElementById('dtp-participants').value;
+            const damage = document.getElementById('dtp-damage').value;
+            const violations = document.getElementById('dtp-violations').value;
+            const witnesses = document.getElementById('dtp-witnesses').value;
+            const officer = document.getElementById('dtp-officer').value;
+
+            if (!location || !date || !weather || !participants || !damage || !violations || !witnesses || !officer) {
+                showNotification('Заполните все поля!', true);
                 return;
             }
-            
-            const record = {
-                id: dtpCounter,
-                protocolNumber: `ДТП-${dtpCounter.toString().padStart(4, '0')}`,
-                dateTime: document.getElementById('dtp-date-time').value,
-                location: document.getElementById('dtp-location').value,
-                participants: document.getElementById('dtp-participants').value,
-                damages: document.getElementById('dtp-damages').value,
-                cause: document.getElementById('dtp-cause').value,
-                scheme: document.getElementById('dtp-scheme').value,
-                witnesses: document.getElementById('dtp-witnesses').value,
-                officer: {
-                    name: document.getElementById('dtp-officer-name').value,
-                    patronymic: document.getElementById('dtp-officer-patronymic').value,
-                    rank: document.getElementById('dtp-officer-rank').value
-                },
-                timestamp: new Date().toLocaleString('ru-RU'),
-                type: 'mvd-dtp'
+
+            const dtpRecord = {
+                id: Date.now(),
+                type: 'police_dtp',
+                location: location,
+                date: date,
+                weather: weather,
+                participants: participants,
+                damage: damage,
+                violations: violations,
+                witnesses: witnesses,
+                officer: officer,
+                timestamp: new Date().toLocaleString('ru-RU')
             };
-            
-            // Сохраняем запись в историю
+
             const history = loadFromStorage('callHistory');
-            history.push(record);
+            history.push(dtpRecord);
             saveToStorage('callHistory', history);
-            
-            // Увеличиваем счетчик
-            dtpCounter++;
-            saveToStorage('mvd-counters', { mvd: mvdCounter, dtp: dtpCounter, arrest: arrestCounter });
-            document.getElementById('dtp-protocol-number').value = `ДТП-${dtpCounter.toString().padStart(4, '0')}`;
-            
+
             // Очищаем форму
-            document.getElementById('dtp-date-time').value = '';
             document.getElementById('dtp-location').value = '';
+            document.getElementById('dtp-date').value = '';
+            document.getElementById('dtp-weather').value = '';
             document.getElementById('dtp-participants').value = '';
-            document.getElementById('dtp-damages').value = '';
-            document.getElementById('dtp-cause').value = '';
-            document.getElementById('dtp-scheme').value = '';
+            document.getElementById('dtp-damage').value = '';
+            document.getElementById('dtp-violations').value = '';
             document.getElementById('dtp-witnesses').value = '';
-            document.getElementById('dtp-officer-name').value = '';
-            document.getElementById('dtp-officer-patronymic').value = '';
-            document.getElementById('dtp-officer-rank').value = '';
-            
-            // Обновляем историю
-            displayMVDHistory();
-            showNotification('Протокол ДТП добавлен в базу данных!');
+            document.getElementById('dtp-officer').value = '';
+
+            displayHistory();
+            updateStats();
+            showNotification('ДТП оформлено и добавлено в историю!');
         }
 
-        function saveArrestRecord() {
-            if (!mvdLoggedIn) {
-                showNotification('Требуется авторизация в системе МВД!', true);
+        // ДОБАВЛЕНИЕ ОТЧЕТА ОБ АРЕСТЕ
+        function addArrestReport() {
+            const name = document.getElementById('arrest-name').value;
+            const passport = document.getElementById('arrest-passport').value;
+            const date = document.getElementById('arrest-date').value;
+            const location = document.getElementById('arrest-location').value;
+            const reason = document.getElementById('arrest-reason').value;
+            const evidence = document.getElementById('arrest-evidence').value;
+            const witnesses = document.getElementById('arrest-witnesses').value;
+            const officer = document.getElementById('arrest-officer').value;
+
+            if (!name || !passport || !date || !location || !reason || !evidence || !witnesses || !officer) {
+                showNotification('Заполните все поля!', true);
                 return;
             }
-            
-            const record = {
-                id: arrestCounter,
-                reportNumber: `АР-${arrestCounter.toString().padStart(4, '0')}`,
-                dateTime: document.getElementById('arrest-date-time').value,
-                arrested: {
-                    name: document.getElementById('arrested-name').value,
-                    patronymic: document.getElementById('arrested-patronymic').value,
-                    surname: document.getElementById('arrested-surname').value,
-                    passport: document.getElementById('arrested-passport').value,
-                    birthdate: document.getElementById('arrested-birthdate').value,
-                    address: document.getElementById('arrested-address').value
-                },
-                location: document.getElementById('arrest-location').value,
-                reason: document.getElementById('arrest-reason').value,
-                seized: document.getElementById('arrest-seized').value,
-                notes: document.getElementById('arrest-notes').value,
-                officer: {
-                    name: document.getElementById('arrest-officer-name').value,
-                    patronymic: document.getElementById('arrest-officer-patronymic').value,
-                    rank: document.getElementById('arrest-officer-rank').value
-                },
-                timestamp: new Date().toLocaleString('ru-RU'),
-                type: 'mvd-arrest'
+
+            const arrestRecord = {
+                id: Date.now(),
+                type: 'police_arrest',
+                name: name,
+                passport: passport,
+                date: date,
+                location: location,
+                reason: reason,
+                evidence: evidence,
+                witnesses: witnesses,
+                officer: officer,
+                timestamp: new Date().toLocaleString('ru-RU')
             };
-            
-            // Сохраняем запись в историю
+
             const history = loadFromStorage('callHistory');
-            history.push(record);
+            history.push(arrestRecord);
             saveToStorage('callHistory', history);
-            
-            // Увеличиваем счетчик
-            arrestCounter++;
-            saveToStorage('mvd-counters', { mvd: mvdCounter, dtp: dtpCounter, arrest: arrestCounter });
-            document.getElementById('arrest-report-number').value = `АР-${arrestCounter.toString().padStart(4, '0')}`;
-            
+
             // Очищаем форму
-            document.getElementById('arrest-date-time').value = '';
-            document.getElementById('arrested-name').value = '';
-            document.getElementById('arrested-patronymic').value = '';
-            document.getElementById('arrested-surname').value = '';
-            document.getElementById('arrested-passport').value = '';
-            document.getElementById('arrested-birthdate').value = '';
-            document.getElementById('arrested-address').value = '';
+            document.getElementById('arrest-name').value = '';
+            document.getElementById('arrest-passport').value = '';
+            document.getElementById('arrest-date').value = '';
             document.getElementById('arrest-location').value = '';
             document.getElementById('arrest-reason').value = '';
-            document.getElementById('arrest-seized').value = '';
-            document.getElementById('arrest-notes').value = '';
-            document.getElementById('arrest-officer-name').value = '';
-            document.getElementById('arrest-officer-patronymic').value = '';
-            document.getElementById('arrest-officer-rank').value = '';
-            
-            // Обновляем историю
-            displayMVDHistory();
-            showNotification('Отчет о задержании добавлен в базу данных!');
-        }
+            document.getElementById('arrest-evidence').value = '';
+            document.getElementById('arrest-witnesses').value = '';
+            document.getElementById('arrest-officer').value = '';
 
-        // ОТОБРАЖЕНИЕ ИСТОРИИ МВД
-        function displayMVDHistory() {
-            const history = loadFromStorage('callHistory');
-            const databaseHistoryContainer = document.getElementById('mvd-database-history');
-            const dtpHistoryContainer = document.getElementById('mvd-dtp-history');
-            const arrestHistoryContainer = document.getElementById('mvd-arrest-history');
-            
-            // Очищаем контейнеры
-            databaseHistoryContainer.innerHTML = '';
-            dtpHistoryContainer.innerHTML = '';
-            arrestHistoryContainer.innerHTML = '';
-            
-            // Заполняем историю
-            history.forEach(record => {
-                const historyItem = document.createElement('div');
-                historyItem.className = 'history-item';
-                
-                if (record.type === 'mvd-database') {
-                    historyItem.innerHTML = `
-                        <span>[${record.timestamp}] ${record.uniqueId} | ${record.action} | ${record.owner.name} ${record.owner.patronymic}</span>
-                        <span class="status-badge">Запись</span>
-                    `;
-                    databaseHistoryContainer.appendChild(historyItem);
-                } else if (record.type === 'mvd-dtp') {
-                    historyItem.innerHTML = `
-                        <span>[${record.timestamp}] ${record.protocolNumber} | ДТП | ${record.location}</span>
-                        <span class="status-badge">Протокол</span>
-                    `;
-                    dtpHistoryContainer.appendChild(historyItem);
-                } else if (record.type === 'mvd-arrest') {
-                    historyItem.innerHTML = `
-                        <span>[${record.timestamp}] ${record.reportNumber} | Задержание | ${record.arrested.name} ${record.arrested.patronymic}</span>
-                        <span class="status-badge">Отчет</span>
-                    `;
-                    arrestHistoryContainer.appendChild(historyItem);
-                }
-            });
-            
-            // Если истории нет, показываем сообщение
-            if (databaseHistoryContainer.children.length === 0) {
-                databaseHistoryContainer.innerHTML = '<div class="history-item">Записей в базе данных еще нет.</div>';
-            }
-            if (dtpHistoryContainer.children.length === 0) {
-                dtpHistoryContainer.innerHTML = '<div class="history-item">Протоколов ДТП еще нет.</div>';
-            }
-            if (arrestHistoryContainer.children.length === 0) {
-                arrestHistoryContainer.innerHTML = '<div class="history-item">Отчетов о задержаниях еще нет.</div>';
-            }
+            displayHistory();
+            updateStats();
+            showNotification('Отчет об аресте добавлен в историю!');
         }
 
         // ГЕНЕРАЦИЯ ВЫЗОВА СМП
@@ -1337,6 +1370,7 @@
                 job: getRandomItem(jobsDB),
                 age: getRandomInt(18, 85),
                 timestamp: new Date().toLocaleString('ru-RU'),
+                createdAt: Date.now(),
                 expiresAt: Date.now() + 5 * 60 * 1000, // 5 минут
                 status: 'active'
             };
@@ -1345,11 +1379,6 @@
             const activeCalls = loadFromStorage('activeCalls');
             activeCalls.push(call);
             saveToStorage('activeCalls', activeCalls);
-
-            // Сохраняем время следующего вызова
-            const nextCallTime = Date.now() + getRandomInt(7, 10) * 60 * 1000;
-            saveToStorage('nextEMSCall', nextCallTime);
-            nextEmsCall = nextCallTime;
 
             // Обновляем отображение
             displayActiveCalls();
@@ -1366,6 +1395,7 @@
                 address: getRandomItem(addressesDB),
                 reason: getRandomItem(fireReasonsDB),
                 timestamp: new Date().toLocaleString('ru-RU'),
+                createdAt: Date.now(),
                 expiresAt: Date.now() + 3 * 60 * 1000, // 3 минуты
                 status: 'active'
             };
@@ -1374,11 +1404,6 @@
             const activeCalls = loadFromStorage('activeCalls');
             activeCalls.push(call);
             saveToStorage('activeCalls', activeCalls);
-
-            // Сохраняем время следующего вызова
-            const nextCallTime = Date.now() + getRandomInt(8, 11) * 60 * 1000;
-            saveToStorage('nextMCHSCall', nextCallTime);
-            nextMchsCall = nextCallTime;
 
             // Обновляем отображение
             displayActiveCalls();
@@ -1461,6 +1486,7 @@
                     from: fromLocation,
                     to: toLocation,
                     salary: salary,
+                    createdAt: Date.now(),
                     expiresAt: Date.now() + contractDuration,
                     status: 'active'
                 };
@@ -1492,7 +1518,7 @@
                     <div class="contract-timer">
                         Срок действия: <span class="contract-timer-${contract.id}">${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}</span>
                     </div>
-                    <button class="btn-accept" onclick="acceptContract(${contract.id})">ПРИНЯТЬ КОНТРАКТ</button>
+                    <button class="btn-accept" onclick="showAcceptModal(${contract.id}, 'contract')">ПРИНЯТЬ КОНТРАКТ</button>
                 `;
                 
                 contractsContainer.appendChild(contractElement);
@@ -1500,11 +1526,6 @@
                 // Запускаем таймер для контракта
                 startContractTimer(contract.id, timeLeft);
             }
-            
-            // Сохраняем время следующего обновления контрактов
-            const nextUpdateTime = Date.now() + 10 * 60 * 1000;
-            saveToStorage('nextContractsUpdate', nextUpdateTime);
-            nextContractsUpdate = nextUpdateTime;
             
             // Запускаем таймер для обновления контрактов
             startContractsTimer();
@@ -1522,12 +1543,31 @@
             
             // Заполняем активные вызовы
             activeCalls.forEach(call => {
+                // Проверяем, не истекло ли время вызова
+                if (Date.now() > call.expiresAt) {
+                    // Помечаем вызов как просроченный
+                    call.status = 'expired';
+                    
+                    // Переносим в историю
+                    const callHistory = loadFromStorage('callHistory');
+                    callHistory.push(call);
+                    
+                    // Сохраняем изменения
+                    saveToStorage('callHistory', callHistory);
+                    
+                    // Удаляем из активных
+                    const activeCalls = loadFromStorage('activeCalls');
+                    const callIndex = activeCalls.findIndex(c => c.id === call.id);
+                    if (callIndex !== -1) {
+                        activeCalls.splice(callIndex, 1);
+                        saveToStorage('activeCalls', activeCalls);
+                    }
+                    
+                    return;
+                }
+                
                 if (call.type === 'ems') {
                     const timeLeft = call.expiresAt - Date.now();
-                    if (timeLeft <= 0) {
-                        // Пропускаем просроченные вызовы
-                        return;
-                    }
                     
                     const callElement = document.createElement('div');
                     callElement.className = 'active-call';
@@ -1546,7 +1586,7 @@
                         <div class="call-info">
                             <strong>Информация о пациенте:</strong><br>
                             Имя: ${call.name}<br>
-                            Отчество: ${call.patronymic}<br>
+                            Отчество: ${call.patronymic<br>
                             Номер паспорта: ${call.passport}<br>
                             Повод к вызову: ${call.reason}<br>
                             Работа: ${call.job}<br>
@@ -1566,10 +1606,6 @@
                     startCallTimer(call.id, 'ems', timeLeft / 1000);
                 } else if (call.type === 'mchs') {
                     const timeLeft = call.expiresAt - Date.now();
-                    if (timeLeft <= 0) {
-                        // Пропускаем просроченные вызовы
-                        return;
-                    }
                     
                     const callElement = document.createElement('div');
                     callElement.className = 'active-call';
@@ -1612,11 +1648,17 @@
             const emsHistoryContainer = document.getElementById('ems-history');
             const mchsHistoryContainer = document.getElementById('mchs-history');
             const contractsHistoryContainer = document.getElementById('contracts-history');
+            const policeDbHistoryContainer = document.getElementById('police-db-history');
+            const policeDtpHistoryContainer = document.getElementById('police-dtp-history');
+            const policeArrestHistoryContainer = document.getElementById('police-arrest-history');
             
             // Очищаем контейнеры
             emsHistoryContainer.innerHTML = '';
             mchsHistoryContainer.innerHTML = '';
             contractsHistoryContainer.innerHTML = '';
+            policeDbHistoryContainer.innerHTML = '';
+            policeDtpHistoryContainer.innerHTML = '';
+            policeArrestHistoryContainer.innerHTML = '';
             
             // Заполняем историю
             history.forEach(call => {
@@ -1651,10 +1693,31 @@
                     mchsHistoryContainer.appendChild(historyItem);
                 } else if (call.type === 'contract') {
                     historyItem.innerHTML = `
-                        <span>[${call.timestamp}] Контракт | ${call.good} | ${call.from} → ${call.to} | ${call.salary} руб.</span>
+                        <span>[${call.timestamp}] Контракт | ${call.good} | ${call.from} → ${call.to} | ${call.salary} руб. | Принял: ${call.acceptedBy || 'Не указан'}</span>
                         <span class="status-badge">Выполнен</span>
                     `;
                     contractsHistoryContainer.appendChild(historyItem);
+                } else if (call.type === 'police_db') {
+                    historyItem.className = 'history-item police-item';
+                    historyItem.innerHTML = `
+                        <span>[${call.timestamp}] БД МВД | ${call.action} | ${call.reason} | ${call.vehicle} | ${call.owner} | ${call.date} | ${call.officer}</span>
+                        <span class="status-badge">Запись</span>
+                    `;
+                    policeDbHistoryContainer.appendChild(historyItem);
+                } else if (call.type === 'police_dtp') {
+                    historyItem.className = 'history-item police-item';
+                    historyItem.innerHTML = `
+                        <span>[${call.timestamp}] ДТП | ${call.location} | ${call.date} | ${call.weather} | ${call.officer}</span>
+                        <span class="status-badge">Оформлено</span>
+                    `;
+                    policeDtpHistoryContainer.appendChild(historyItem);
+                } else if (call.type === 'police_arrest') {
+                    historyItem.className = 'history-item police-item';
+                    historyItem.innerHTML = `
+                        <span>[${call.timestamp}] Арест | ${call.name} | ${call.passport} | ${call.location} | ${call.date} | ${call.officer}</span>
+                        <span class="status-badge">Зарегистрировано</span>
+                    `;
+                    policeArrestHistoryContainer.appendChild(historyItem);
                 }
             });
             
@@ -1668,6 +1731,56 @@
             if (contractsHistoryContainer.children.length === 0) {
                 contractsHistoryContainer.innerHTML = '<div class="history-item">Контрактов еще не было.</div>';
             }
+            if (policeDbHistoryContainer.children.length === 0) {
+                policeDbHistoryContainer.innerHTML = '<div class="history-item">Записей в базе данных еще не было.</div>';
+            }
+            if (policeDtpHistoryContainer.children.length === 0) {
+                policeDtpHistoryContainer.innerHTML = '<div class="history-item">Оформленных ДТП еще не было.</div>';
+            }
+            if (policeArrestHistoryContainer.children.length === 0) {
+                policeArrestHistoryContainer.innerHTML = '<div class="history-item">Арестов еще не было.</div>';
+            }
+        }
+
+        // ОБНОВЛЕНИЕ СТАТИСТИКИ
+        function updateStats() {
+            const history = loadFromStorage('callHistory');
+            
+            // Статистика контрактов
+            const contractsCompleted = history.filter(item => item.type === 'contract' && item.status === 'completed').length;
+            const contractsExpired = history.filter(item => item.type === 'contract' && item.status === 'expired').length;
+            const contractsTotal = contractsCompleted + contractsExpired;
+            
+            document.getElementById('contracts-completed').textContent = contractsCompleted;
+            document.getElementById('contracts-expired').textContent = contractsExpired;
+            document.getElementById('contracts-total').textContent = contractsTotal;
+            
+            // Статистика СМП
+            const emsCompleted = history.filter(item => item.type === 'ems' && item.status === 'completed').length;
+            const emsExpired = history.filter(item => item.type === 'ems' && item.status === 'expired').length;
+            const emsTotal = emsCompleted + emsExpired;
+            
+            document.getElementById('ems-completed').textContent = emsCompleted;
+            document.getElementById('ems-expired').textContent = emsExpired;
+            document.getElementById('ems-total').textContent = emsTotal;
+            
+            // Статистика МЧС
+            const mchsCompleted = history.filter(item => item.type === 'mchs' && item.status === 'completed').length;
+            const mchsExpired = history.filter(item => item.type === 'mchs' && item.status === 'expired').length;
+            const mchsTotal = mchsCompleted + mchsExpired;
+            
+            document.getElementById('mchs-completed').textContent = mchsCompleted;
+            document.getElementById('mchs-expired').textContent = mchsExpired;
+            document.getElementById('mchs-total').textContent = mchsTotal;
+            
+            // Статистика МВД
+            const dbTotal = history.filter(item => item.type === 'police_db').length;
+            const dtpTotal = history.filter(item => item.type === 'police_dtp').length;
+            const arrestTotal = history.filter(item => item.type === 'police_arrest').length;
+            
+            document.getElementById('db-total').textContent = dbTotal;
+            document.getElementById('dtp-total').textContent = dtpTotal;
+            document.getElementById('arrest-total').textContent = arrestTotal;
         }
 
         // ПОКАЗ МОДАЛЬНОГО ОКНА ДЛЯ ПОДТВЕРЖДЕНИЯ ПРИНЯТИЯ ВЫЗОВА
@@ -1681,6 +1794,8 @@
                 modalTitle.textContent = 'Принятие вызова СМП';
             } else if (callType === 'mchs') {
                 modalTitle.textContent = 'Принятие вызова МЧС';
+            } else if (callType === 'contract') {
+                modalTitle.textContent = 'Принятие контракта';
             }
             
             // Очищаем поля ввода
@@ -1707,7 +1822,11 @@
             closeModal('accept-modal');
             
             // Принимаем вызов
-            acceptCall(currentCallId, acceptedBy);
+            if (currentCallType === 'contract') {
+                acceptContract(currentCallId, acceptedBy);
+            } else {
+                acceptCall(currentCallId, acceptedBy);
+            }
         }
 
         // ПРИНЯТИЕ ВЫЗОВА
@@ -1735,13 +1854,14 @@
             // Обновляем отображение
             displayActiveCalls();
             displayHistory();
+            updateStats();
             
             // Показываем уведомление
             showNotification('Вызов принят и добавлен в историю!');
         }
 
         // ПРИНЯТИЕ КОНТРАКТА
-        function acceptContract(contractId) {
+        function acceptContract(contractId, acceptedBy) {
             const callHistory = loadFromStorage('callHistory');
             const contractIndex = activeContracts.findIndex(c => c.id === contractId);
             
@@ -1756,6 +1876,7 @@
                 from: contract.from,
                 to: contract.to,
                 salary: contract.salary,
+                acceptedBy: acceptedBy,
                 timestamp: new Date().toLocaleString('ru-RU'),
                 status: 'completed'
             });
@@ -1774,6 +1895,7 @@
             
             // Обновляем отображение
             displayHistory();
+            updateStats();
             
             // Показываем уведомление
             showNotification('Контракт принят и добавлен в историю!');
@@ -1783,16 +1905,17 @@
         function startEMSTimer() {
             clearInterval(emsTimerInterval);
             
-            // Обновляем отображение таймера
-            updateTimerDisplay('ems-timer', nextEmsCall - Date.now());
+            // Устанавливаем случайное время до следующего вызова (7-10 минут)
+            nextEmsCall = getRandomInt(7, 10) * 60 * 1000;
+            updateTimerDisplay('ems-timer', nextEmsCall);
             
             emsTimerInterval = setInterval(() => {
-                const timeLeft = nextEmsCall - Date.now();
+                nextEmsCall -= 1000;
                 
-                if (timeLeft <= 0) {
+                if (nextEmsCall <= 0) {
                     generateEMSCall();
                 } else {
-                    updateTimerDisplay('ems-timer', timeLeft);
+                    updateTimerDisplay('ems-timer', nextEmsCall);
                 }
             }, 1000);
         }
@@ -1800,16 +1923,17 @@
         function startMCHSTimer() {
             clearInterval(mchsTimerInterval);
             
-            // Обновляем отображение таймера
-            updateTimerDisplay('mchs-timer', nextMchsCall - Date.now());
+            // Устанавливаем случайное время до следующего вызова (8-11 минут)
+            nextMchsCall = getRandomInt(8, 11) * 60 * 1000;
+            updateTimerDisplay('mchs-timer', nextMchsCall);
             
             mchsTimerInterval = setInterval(() => {
-                const timeLeft = nextMchsCall - Date.now();
+                nextMchsCall -= 1000;
                 
-                if (timeLeft <= 0) {
+                if (nextMchsCall <= 0) {
                     generateMCHSCall();
                 } else {
-                    updateTimerDisplay('mchs-timer', timeLeft);
+                    updateTimerDisplay('mchs-timer', nextMchsCall);
                 }
             }, 1000);
         }
@@ -1817,16 +1941,17 @@
         function startContractsTimer() {
             clearInterval(contractsTimerInterval);
             
-            // Обновляем отображение таймера
-            updateTimerDisplay('contracts-timer', nextContractsUpdate - Date.now());
+            // Устанавливаем время до следующего обновления контрактов (10 минут)
+            nextContractsUpdate = 10 * 60 * 1000;
+            updateTimerDisplay('contracts-timer', nextContractsUpdate);
             
             contractsTimerInterval = setInterval(() => {
-                const timeLeft = nextContractsUpdate - Date.now();
+                nextContractsUpdate -= 1000;
                 
-                if (timeLeft <= 0) {
+                if (nextContractsUpdate <= 0) {
                     generateContracts();
                 } else {
-                    updateTimerDisplay('contracts-timer', timeLeft);
+                    updateTimerDisplay('contracts-timer', nextContractsUpdate);
                 }
             }, 1000);
         }
@@ -1877,30 +2002,6 @@
                 
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    
-                    // Помечаем вызов как просроченный
-                    const activeCalls = loadFromStorage('activeCalls');
-                    const callIndex = activeCalls.findIndex(call => call.id === callId);
-                    
-                    if (callIndex !== -1) {
-                        const expiredCall = activeCalls[callIndex];
-                        expiredCall.status = 'expired';
-                        
-                        // Переносим в историю
-                        const callHistory = loadFromStorage('callHistory');
-                        callHistory.push(expiredCall);
-                        
-                        // Удаляем из активных
-                        activeCalls.splice(callIndex, 1);
-                        
-                        // Сохраняем изменения
-                        saveToStorage('activeCalls', activeCalls);
-                        saveToStorage('callHistory', callHistory);
-                        
-                        // Обновляем отображение
-                        displayActiveCalls();
-                        displayHistory();
-                    }
                 }
             }, 1000);
         }
@@ -1923,6 +2024,34 @@
             }, 3000);
         }
 
+        // ПРОВЕРКА ПРОСРОЧЕННЫХ ВЫЗОВОВ ПРИ ЗАГРУЗКЕ
+        function checkExpiredCalls() {
+            const activeCalls = loadFromStorage('activeCalls');
+            const callHistory = loadFromStorage('callHistory');
+            let updated = false;
+            
+            for (let i = activeCalls.length - 1; i >= 0; i--) {
+                const call = activeCalls[i];
+                
+                if (Date.now() > call.expiresAt) {
+                    // Помечаем вызов как просроченный
+                    call.status = 'expired';
+                    
+                    // Переносим в историю
+                    callHistory.push(call);
+                    
+                    // Удаляем из активных
+                    activeCalls.splice(i, 1);
+                    updated = true;
+                }
+            }
+            
+            if (updated) {
+                saveToStorage('activeCalls', activeCalls);
+                saveToStorage('callHistory', callHistory);
+            }
+        }
+
         // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
         function init() {
             // Инициализируем хранилище, если оно пустое
@@ -1933,39 +2062,36 @@
                 saveToStorage('callHistory', []);
             }
             
-            // Загружаем время следующих событий
-            const now = Date.now();
-            nextEmsCall = parseInt(localStorage.getItem('nextEMSCall') || (now + getRandomInt(7, 10) * 60 * 1000));
-            nextMchsCall = parseInt(localStorage.getItem('nextMCHSCall') || (now + getRandomInt(8, 11) * 60 * 1000));
-            nextContractsUpdate = parseInt(localStorage.getItem('nextContractsUpdate') || (now + 10 * 60 * 1000));
-            
-            // Проверяем, не прошло ли время событий
-            if (now >= nextEmsCall) {
-                generateEMSCall();
-            }
-            
-            if (now >= nextMchsCall) {
-                generateMCHSCall();
-            }
-            
-            if (now >= nextContractsUpdate) {
-                generateContracts();
-            }
+            // Проверяем просроченные вызовы
+            checkExpiredCalls();
             
             // Загружаем активные вызовы и историю
             displayActiveCalls();
             displayHistory();
+            updateStats();
             
-            // Запускаем таймеры
-            startEMSTimer();
-            startMCHSTimer();
-            startContractsTimer();
+            // Генерируем начальные контракты
+            generateContracts();
             
-            // Проверяем, был ли пользователь уже авторизован в МВД
-            const mvdAuth = localStorage.getItem('mvdAuth');
-            if (mvdAuth === 'true') {
-                document.getElementById('mvd-password').value = '121212';
-                loginMVD();
+            // Запускаем таймеры, если они еще не запущены
+            if (nextEmsCall <= 0) {
+                startEMSTimer();
+            }
+            if (nextMchsCall <= 0) {
+                startMCHSTimer();
+            }
+            
+            // Генерируем первый вызов при загрузке
+            setTimeout(() => {
+                generateEMSCall();
+                generateMCHSCall();
+            }, 2000);
+            
+            // Проверяем авторизацию МВД
+            const isPoliceLoggedIn = localStorage.getItem('policeLoggedIn') === 'true';
+            if (isPoliceLoggedIn) {
+                document.getElementById('police-login-section').style.display = 'none';
+                document.getElementById('police-content').style.display = 'block';
             }
         }
 
